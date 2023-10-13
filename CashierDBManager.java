@@ -1,5 +1,7 @@
-package COMP603_ProjectGroup13;
+package COMP603_ProjectGroup13_DB;
 
+import COMP603_ProjectGroup13.ProductList;
+import COMP603_ProjectGroup13.Staff_Record;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

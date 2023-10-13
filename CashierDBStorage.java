@@ -1,5 +1,8 @@
-package COMP603_ProjectGroup13;
+package COMP603_ProjectGroup13_DB;
 
+import COMP603_ProjectGroup13.ProductList;
+import COMP603_ProjectGroup13.Staff_Record;
+import COMP603_ProjectGroup13.Product;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DatabaseMetaData;

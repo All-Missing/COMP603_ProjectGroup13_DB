@@ -1,4 +1,4 @@
-package COMP603_ProjectGroup13;
+package COMP603_ProjectGroup13_DB;
 
 
 public class CashierDBRun {

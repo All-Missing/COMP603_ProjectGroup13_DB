@@ -7,7 +7,8 @@ public class CashierDBRun {
     public static void main(String[] args) {
         CashierDBStorage cashierStorage = new CashierDBStorage();
         cashierStorage.createProductDB();
-        cashierStorage.createStaffDB();
+        cashierStorage.createStaffDB();        
+        cashierStorage.createOrderDB();
     }
     
 }

@@ -1,7 +1,5 @@
 package COMP603_ProjectGroup13_DB;
 
-import COMP603_ProjectGroup13.ProductList;
-import COMP603_ProjectGroup13.Staff_Record;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,8 +10,8 @@ public final class CashierDBManager {
     
     private static final String USER_NAME = "allmissing";
     private static final String PASSWORD = "pdc";
-    private static final String URL = "jdbc:derby://localhost:1527/CashierDB;";
-//    private static final String URL = "jdbc:derby:CashierDB_Ebd; create=true";
+//    private static final String URL = "jdbc:derby://localhost:1527/CashierDB;";
+    private static final String URL = "jdbc:derby:CashierDB_Ebd; create=true";
     
     Connection conn;
     

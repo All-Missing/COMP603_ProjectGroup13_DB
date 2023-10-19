@@ -36,8 +36,8 @@ public class CashierDBStorage {
             //connect and initialize db
             statement = conn.createStatement();        
             String tableName = "PRODUCT";             
-            checkExistedTable(tableName); //Check if table exisits. if not, manually create it
-            this.statement.addBatch("CREATE TABLE " + tableName + " (item_id VARCHAR(10) PRIMARY KEY, "
+            checkExistedTable("PRODUCT"); //Check if table exisits. if not, manually create it
+            this.statement.addBatch("CREATE TABLE PRODUCT (item_id VARCHAR(10) PRIMARY KEY, "
                     + "item VARCHAR(50), item_price DOUBLE, category VARCHAR(20))");
             
             //Retrieve product records value and insert data into sql table

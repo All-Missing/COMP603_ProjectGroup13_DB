@@ -9,6 +9,7 @@ public class CashierDBRun {
         cashierStorage.createProductDB();
         cashierStorage.createStaffDB();        
         cashierStorage.createOrderDB();
+        cashierStorage.createBalanceDB();
     }
     
 }

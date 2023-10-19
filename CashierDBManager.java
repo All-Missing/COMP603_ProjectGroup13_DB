@@ -57,7 +57,7 @@ public final class CashierDBManager {
      public ResultSet queryCahierDB(String sql) {
 
         Connection connection = this.conn;
-        java.sql.Statement statement = null;
+        Statement statement = null;
         ResultSet resultSet = null;
 
         try {

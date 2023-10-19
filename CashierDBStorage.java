@@ -34,31 +34,24 @@ public class CashierDBStorage {
         
         try {
             //connect and initialize db
-            statement = conn.createStatement();
-        
+            statement = conn.createStatement();        
             String tableName = "PRODUCT";             
             checkExistedTable(tableName); //Check if table exisits. if not, manually create it
-            
-            String sqlTable = "CREATE TABLE " + tableName + " (item_id VARCHAR(10) PRIMARY KEY, "
-                    + "item VARCHAR(50), item_price DOUBLE, category VARCHAR(20))";                    
-            statement.executeUpdate(sqlTable);
-            System.out.println("Table " + tableName +" created");
+            this.statement.addBatch("CREATE TABLE " + tableName + " (item_id VARCHAR(10) PRIMARY KEY, "
+                    + "item VARCHAR(50), item_price DOUBLE, category VARCHAR(20))");
             
             //Retrieve product records value and insert data into sql table
             HashMap<String, Product> product_records = productList.getProduct_records();                        
-            for (Map.Entry<String, Product> entry: product_records.entrySet()) {
-                
+            for (Map.Entry<String, Product> entry: product_records.entrySet()) {                
                 String item_id = entry.getKey();
                 Product product = entry.getValue();
-                
-                String insertQuery = "INSERT INTO " + tableName + " VALUES ('"
+                this.statement.addBatch("INSERT INTO " + tableName + " VALUES ('"
                         + item_id + "', '"
                         + product.getItem() + "', "
                         + product.getItemPrice() + ", '"
-                        + product.getCategory() + "')";
-                         
-                statement.executeUpdate(insertQuery);
-            }                        
+                        + product.getCategory() + "')");                                                         
+            }
+            this.statement.executeBatch();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }          
@@ -73,16 +66,15 @@ public class CashierDBStorage {
             this.checkExistedTable("STAFF");//Check if table exisits. if not, manually create it            
             this.statement.addBatch("CREATE TABLE STAFF (staff_id VARCHAR(10) PRIMARY KEY, staff_name VARCHAR(20))");
             this.statement.executeBatch();
+            
 //            Retrieve product records value and insert data into sql table
             HashMap<String, String> staff_records = staffList.getStaff_list();
             for (Map.Entry<String, String> entry: staff_records.entrySet()) {                
                 String staff_id = entry.getKey();
                 String staff_name = entry.getValue();               
-                this.statement.addBatch("INSERT INTO STAFF VALUES ('"
-                        + staff_id + "', '"                       
-                        + staff_name + "')");                         
-                this.statement.executeBatch();
+                this.statement.addBatch("INSERT INTO STAFF VALUES ('"+ staff_id+"', '"+ staff_name + "')");                         
             }                        
+            this.statement.executeBatch();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }          
@@ -118,8 +110,7 @@ public class CashierDBStorage {
                         bill = Double.parseDouble(lineParts[4]);
                         
                         //Insert data into Bill_Order table
-                        this.statement.addBatch("INSERT INTO BILL_ORDER VALUES ("
-                                + shift_id +",'"+staff_id + "', " + order_id + ", " + bill + ")");                        
+                        this.statement.addBatch("INSERT INTO BILL_ORDER VALUES ("+ shift_id +",'"+staff_id + "', " + order_id + ", " + bill + ")");
                         this.statement.executeBatch();
                     }
                 }

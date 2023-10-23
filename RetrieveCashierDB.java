@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,8 +23,7 @@ public class RetrieveCashierDB {
         dbManager = new CashierDBManager();
         conn = dbManager.getCashierDBConnection();
     }
-    
-    
+        
     //This method will return a sum of bills, based on each specific shift_id
     public double getBillOrderPerfShift(int shift_id) {
     
@@ -40,8 +41,38 @@ public class RetrieveCashierDB {
         return totalBill;
     }
     
+    //Retrieve product list
+    public List<Product> RetrieveProductList() {
+        List<Product> productList = new ArrayList<>();
+        ResultSet rs = dbManager.queryCahierDB("SELECT * FROM PRODUCT");
+        
+        try {
+            while (rs.next()) {
+                String item_id = rs.getString("item_id");
+                String item = rs.getString("item");
+                Double item_price = rs.getDouble("item_price");
+                String category = rs.getString("category");
+                //Test these products can print out                
+                System.out.println("productID: "+item_id+" item: "+item+" itemPrice: "+item_price
+                                            +"cagetory: "+category);
+                Product product = new Product(item_id, item, item_price, category);
+                productList.add(product);
+            }
+//            System.out.println("Test retrieveProductList succeed!");
+        } catch (SQLException ex) {
+            Logger.getLogger(RetrieveCashierDB.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return productList;
+    }
     
-    public Product RetrieveProductWithID(String itemID) {
+    public ResultSet retrieveProduct(int shiftID) {
+        ResultSet rs = null;
+        
+        return rs;
+    }
+    
+    //Give product id from a list
+    public Product retrieveProductWithID(String itemID) {
         Product product = new Product();
         ResultSet rs = dbManager.queryCahierDB("SELECT * FROM PRODUCT WHERE item_id = '" + itemID + "'");
         
@@ -67,7 +98,8 @@ public class RetrieveCashierDB {
         Double sum_bill = rcDB.getBillOrderPerfShift(1);
         System.out.println(sum_bill);
         RetrieveCashierDB retrieveDB = new RetrieveCashierDB();
-        System.out.println(retrieveDB.RetrieveProductWithID("PI001"));        
+        System.out.println(retrieveDB.retrieveProductWithID("PI001"));
+        List<Product> pLists = rcDB.RetrieveProductList();        
     }
     
 }

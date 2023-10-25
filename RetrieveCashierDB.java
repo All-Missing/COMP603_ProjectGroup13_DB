@@ -53,8 +53,8 @@ public class RetrieveCashierDB {
                 Double item_price = rs.getDouble("item_price");
                 String category = rs.getString("category");
                 //Test these products can print out                
-                System.out.println("productID: "+item_id+" item: "+item+" itemPrice: "+item_price
-                                            +"cagetory: "+category);
+//                System.out.println("productID: "+item_id+" item: "+item+" itemPrice: "+item_price
+//                                            +"cagetory: "+category); //Testing
                 Product product = new Product(item_id, item, item_price, category);
                 productList.add(product);
             }
